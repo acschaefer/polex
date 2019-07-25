@@ -1,12 +1,6 @@
 # Long-Term Urban Vehicle Localization Using Pole Landmarks Extracted from 3-D Lidar Scans
 
-> **NOTE**
-> 
-> In its current version, this repository is a preview.
-> We will publish the complete implementation of the localization system described in the paper "Long-Term Urban Vehicle Localization Using Pole Landmarks Extracted from 3-D Lidar Scans" if the paper is accepted.
-
-
-This repository contains the Python code that accompanies our paper ["Long-Term Urban Vehicle Localization Using Pole Landmarks Extracted from 3-D Lidar Scans"](https://www.ecmr2019.eu/) submitted to the [European Conference on Mobile Robots](https://www.ecmr2019.eu/).
+This repository contains the Python code that accompanies our paper ["Long-Term Urban Vehicle Localization Using Pole Landmarks Extracted from 3-D Lidar Scans"](http://ais.informatik.uni-freiburg.de/publications/papers/schaefer19ecmr.pdf) submitted to the [European Conference on Mobile Robots](https://www.ecmr2019.eu/).
 The implementation allows to
 
 * extract the parameters of pole-like objects from 3-D lidar scans,
@@ -58,33 +52,5 @@ sudo apt install python-pip python-tk
 and use it to install the following Python packages:
 
 ```bash
-pip install numpy matplotlib open3d-python progressbar pyquaternion transforms3d scipy networkx psutil
+pip install numpy matplotlib open3d-python progressbar pyquaternion transforms3d scipy scikit-image networkx psutil
 ```
-
-## NCLT ground-truth optimization
-
-For the experiments on NCLT described in the paper, we rely on the ground-truth poses given the by authors.
-Due to the way they were created, these poses are however quite noisy.
-To deal with this issue, an optimized ground-truth for NCLT can be generated separately for the trajectory of each session using ICP matching of the Velodyne scans.
-First a pose graph is created with
-
-```bash
-python ncltgtopt.py 2012-01-08
-```
-
-The pose graph consists of one node for each odometry measurement (interpolated to the Velodyne time stamps) and corresponding edges.
-The original NCLT ground truth poses and covariances are added as edges from an additional origin node at `(0,0,0)`.
-Further, ICP scan matching edges are added for each node to its neighbors.
-
-The pose graph is split into chunks and is optimized and merged with:
-
-```bash
-python spltoptpg.py 2012-01-08
-```
-
-Example images of point clouds registered with the original NCLT ground truth and with our optimized ground truth make the considerable noise in the original ground-truth data obvious:
-![NCLT laser scans accumulated using original ground truth](img/2012-11-16_13500_15500_gt.jpg)
-<br/>*NCLT laser scans accumulated using original ground truth.*
-
-![NCLT laser scans accumulated using refined ground truth](img/2012-11-16_13500_15500_gt_opt.jpg)
-<br/>*NCLT laser scans accumulated using refined ground truth.*
