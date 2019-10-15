@@ -40,6 +40,8 @@ The red dots denote the particles, the blue dots denote the reference landmarks,
 
 ## Running the code
 
+First of all, please make sure you are running Python 2.7.
+
 While the pole extractor is represented by its own Python module [poles.py](poles/poles.py), the mapping and localization module are implemented separately for NCLT [(ncltpoles.py)](poles/ncltpoles.py) and KITTI [(kittipoles.py)](poles/kittipoles.py) due to the different representations of the datasets.
 For closer information about the workings of the implementation, please read the paper and follow the source code documentation.
 
@@ -54,3 +56,7 @@ and use it to install the following Python packages:
 ```bash
 pip install numpy matplotlib open3d-python progressbar pyquaternion transforms3d scipy scikit-image networkx psutil
 ```
+
+Then, please check out the [ray tracing repository](https://github.com/acschaefer/ray_tracing) and build it.
+
+With these prerequisites, you are ready to run the experiments and the different modules.
